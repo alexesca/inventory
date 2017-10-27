@@ -1,0 +1,25 @@
+// Inserting client
+
+INSERT INTO `clients`(`clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `comments`)
+VALUES ('Tony','Stark','tony@starkent.com','Iam1ronM@n',"I am the real Ironman")
+
+// Updating clients level
+
+UPDATE `clients` SET `clientLevel`='3' WHERE `clientId` = 2
+
+// Select and replace
+
+Update `inventory`
+Set    `invName` = replace(invName, 'Nylon Rope', 'Climbing Rope'),
+ `invDescription` = replace(invDescription, 'Nylon Rope', 'Climbing Rope')
+WHERE invId = 15;
+
+// Inner Join
+
+SELECT `inventory`.`invName`, `categories`.`categoryName`
+FROM `categories`
+INNER JOIN `inventory` ON  `categories`.`categoryId` = `inventory`.`categoryId`;
+
+// Deleting
+
+DELETE FROM `inventory` WHERE `invId` = 7

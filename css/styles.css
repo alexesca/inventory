@@ -1,0 +1,433 @@
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0px 0px 0px 0px;
+    background-image: url('../images/site/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: "Comic Sans MS";
+
+
+}
+
+.container {
+    width: 1000px;
+    background-color: white;
+}
+
+/*header*/
+
+header {
+    display: -webkit-flex;
+    display: inline-flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-flow: nowrap;
+    background-color: white;
+    width: 100%;
+}
+
+.acme-logo {
+    max-width: 250px;
+    max-height: 150px;
+    margin-left: 5px;
+}
+
+.my-account {
+    float: right;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+
+.my-account-logo {
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+
+.my-account  a  {
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 0;
+    text-decoration: none;
+}
+
+.filler {
+    flex-grow: 1;
+}
+
+.my-account a:visited {
+    color: black;
+}
+
+.my-account a:hover {
+    color: #de2226;
+}
+
+/* Navigation bar */
+
+.nav > ul {
+    list-style-type: none;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #de2226;
+}
+
+.ul li {
+    float: left;
+}
+
+.ul li a {
+    font-size: 24px;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin: 5px 5px 0px 5px;
+}
+
+.ul li a:hover {
+    background-color: #fff;
+    color: #de2226;
+}
+
+.ul li.selected a {
+    background-color: #ffffff;
+    color: #de2226;
+}
+
+.main {
+    clear: both;
+    background-color: white;
+}
+
+.jumbotron {
+    display: flex;
+    justify-content: space-between;
+    background: red url("../images/site/rocketfeature.jpg") 100%;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rocket-texts p {
+    font-size: 20px;
+    margin: 0;
+    color: red;
+    font-weight: bold;
+}
+
+.acme-rocket-title{
+    margin: 0;
+    color: red;
+    font-weight: bold;
+}
+
+#i-want-it-img {
+    width: 250px;
+    height: 60px;
+}
+
+
+.jumbotron-labels-and-img {
+    width: 40%;
+    float: right;
+    padding: 40px;
+    padding-top: 40px;
+}
+
+/* Recipes section*/
+
+.recipes-dinner-holder {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-top: 15px;
+}
+
+.recipes-section {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.recipe-img-holder {
+    background-color: gray;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.recipe-link-holder {
+    text-align: center;
+    font-size: 22px;
+}
+
+.thumbnail > img {
+    height: 80%;
+    width: 80%;
+}
+
+#recipe-1 {
+    width: 40%;
+    float: left;
+}
+
+#recipe-2 {
+    width: 40%;
+    float: left;
+    margin: 5px;
+}
+
+#recipe-3 {
+    width: 40%;
+    float: left;
+    margin: 5px;
+}
+
+#recipe-4 {
+    width: 40%;
+    float: left;
+    margin: 5px;
+}
+
+.featured-recipes {
+
+}
+
+.dinner-section {
+    width: 50%;
+    float: right;
+}
+
+.footer {
+    clear: both;
+}
+
+.footer-info {
+    border-top: 4px solid black;
+    margin-top: 10px;
+    text-align: center;
+    padding: 0;
+}
+
+.footer-info p {
+    margin: 0;
+}
+
+.review-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media (max-width: 1100px) {
+    .thumbnail > img {
+        height: 90%;
+        width: 90%;
+    }
+
+    .recipes-dinner-holder {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #i-want-it-img {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 756px) {
+    .ul li a {
+        font-size: 20px;
+        display: flex;
+        padding: 4px 6px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    li a {
+        font-size: 14px;
+        display: flex;
+        padding: 4px 6px;
+    }
+
+    .acme-logo {
+        width: 150px;
+        height: 100px;
+        margin-left: 2px;
+    }
+
+    .my-account {
+        float: right;
+        margin-top: 14px;
+        margin-right: 14px;
+    }
+
+    .my-account-logo {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .my-account  a  {
+        font-size: 25px;
+    }
+
+    .dinner-section{
+        float: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .recipes-section{
+        float: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .recipes-dinner-holder {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #i-want-it-img {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .ul li a {
+        font-size: 12px;
+        display: flex;
+        padding: 4px 6px;
+    }
+
+    .jumbotron-labels-and-img{
+        align-self: stretch;
+        background-color:rgba(255,255,255,0.5);
+        font-size: 12px;
+    }
+
+    .acme-rocket-title{
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .rocket-texts{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 370px) {
+    .acme-logo {
+        width: 100px;
+        height: 50px;
+        margin-left: 2px;
+    }
+
+    .my-account {
+        float: right;
+        margin-top: 4px;
+        margin-right: 4px;
+    }
+
+    .my-account-logo {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .my-account  a  {
+        font-size: 20px;
+    }
+
+    #i-want-it-img {
+        width: 100%;
+    }
+
+    .jumbotron-labels-and-img{
+        align-self: stretch;
+        background-color:rgba(255,255,255,0.5);
+        font-size: 12px;
+    }
+
+    .acme-rocket-title{
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .rocket-texts{
+        font-size: 12px;
+    }
+}
+
+/* Login form */
+
+.html-form{
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border: 1px solid orange;
+    border-radius: 3px;
+    padding: 15px;
+    background-color:rgba(255,255,255,0.5);
+}
+
+.html-form input[type="text"], input[type="number"]{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.categoryId {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.html-form button {
+    height: 30px;
+    float: right;
+}
+
+#regbtn {
+    height: 30px;
+    float: right;
+}
+
+#invDescription {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+
+.error {
+    border: 1px solid darkred;
+    background-color: salmon;
+    padding: 5px;
+    color: #fff;
+}
+
+.success {
+    border: 1px solid darkgreen;
+    background-color: darkseagreen;
+    padding: 5px;
+    color: #fff;
+}
