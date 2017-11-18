@@ -7,23 +7,31 @@
     <title>Login</title>
 </head>
 <body>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header/index.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/nav/index.php'; ?>
-<main>
-    <div class="main">
-        <h1>Acme Login</h1>
-        <div class="html-form">
-            <form action="POST">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-                <button>Login</button>
-            </form>
-            <a href="./?action=signup" id="create-account-link">Not an ACME member? Create an account</a>
+<div class="container">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header/index.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/nav/index.php'; ?>
+    <main>
+        <div class="main">
+            <h1>Acme Login</h1>
+            <?php
+            if (isset($message)) {
+                echo $message;
+            }
+            ?>
+            <div class="html-form">
+                <form method="post" action="/acme/accounts/">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                    <input type="hidden" name="action" value="login">
+                    <button>Login</button>
+                </form>
+                <a href="./?action=signup" id="create-account-link">Not an ACME member? Create an account</a>
+            </div>
         </div>
-    </div>
-</main>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer/index.php'; ?>
+    </main>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer/index.php'; ?>
+</div>
 </body>
 </html>

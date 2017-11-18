@@ -1,8 +1,8 @@
 <?php
 function acmeConnect() {
     $dsn = 'mysql:host=127.0.0.1;dbname=acme';
-    $username = 'root';
-    $password = '';
+    $username = 'iClient';
+    $password = '123456789';
     try {
         return $db = new PDO($dsn, $username, $password);
     } catch (Exception $e) {

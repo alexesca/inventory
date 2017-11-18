@@ -1,3 +1,8 @@
+<?php
+if (empty($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1){
+    header('location: ./../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +12,7 @@
     <title>Product Management</title>
 </head>
 <body>
+<div class="container">
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header/index.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/nav/index.php'; ?>
 <main>
@@ -15,7 +21,10 @@
         <?php echo $msg; ?>
         <div class="html-form">
             <form method="post" action="/acme/products/index.php">
-                <input type="text" name="categoryName" id="category">
+                <input type="text" name="categoryName" id="category" required
+                    <?php if (isset($categoryName)) {
+                        echo "value='$categoryName'";
+                    } ?>>
                 <input type="hidden" name="action" value="insertCategory">
                 <input type="submit" name="submit" id="regbtn" value="Add">
             </form>
@@ -23,6 +32,6 @@
     </div>
 </main>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer/index.php'; ?>
-
+</div>
 </body>
 </html>
