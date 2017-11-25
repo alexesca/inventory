@@ -7,14 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header/index.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/nav/index.php'; ?>
-<main>
-    <div class="main">
-        <h1>Content Tile Here</h1>
-    </div>
-</main>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer/index.php'; ?>
-
+<div class="container">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header/index.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/nav/index.php'; ?>
+    <main>
+        <div class="main">
+            <h1>Content Tile Here</h1>
+        </div>
+    </main>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer/index.php'; ?>
+</div>
 </body>
 </html>
