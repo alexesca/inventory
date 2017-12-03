@@ -7,7 +7,10 @@
             echo "<span id='welcome'>Welcome $cookieFirstname</span>";
         }
         if (isset($_SESSION['loggedin'])) {
-            echo "<a href='/acme/accounts?action=logout'>Log out</a>";
+            if (isset($welcomeMsg)) {
+                echo "<span id='welcome'><a href=\"/acme/accounts/?action=admin\">$welcomeMsg</a></span>";
+            }
+            echo "<a href='/acme/accounts?action=logout' id='logout'>Log out</a>";
         } else {
             ?>
             <a href="/acme/accounts?action=login"><img src="/acme/images/site/account.gif" class="my-account-logo" alt="Account">My Account</a>

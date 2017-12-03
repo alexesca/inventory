@@ -15,6 +15,17 @@ $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 if (!$action) {
     $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 }
+
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstname'])){
+    $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+}
+
+// Capturing the cookie
+if(isset($_COOKIE['welcomeMsg'])){
+    $welcomeMsg = filter_input(INPUT_COOKIE, 'welcomeMsg', FILTER_SANITIZE_STRING);
+}
+
 switch ($action) {
 
     case 'login':
@@ -47,6 +58,12 @@ switch ($action) {
         }
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
+        // Setting welcoming msgs cookies
+        $welcomeMsg =  "Welcome, $clientData[clientFirstname]";
+        setcookie('welcomeMsg', $welcomeMsg, strtotime('+1 year'), '/');
+        // Destroying cookie
+        setcookie('firstname', null,  strtotime('-1 year'), '/');
+        $cookieFirstname = null;
         // Remove the password from the array
         // the array_pop function removes the last
         // element from an array
