@@ -57,7 +57,7 @@ header {
 }
 
 
-.my-account  a  {
+.my-account  {
     float: right;
     font-size: 35px;
     font-weight: bold;

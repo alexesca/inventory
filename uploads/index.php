@@ -24,6 +24,11 @@ $image_dir = '/acme/uploads/images';
 // The path is the full path from the server root
 $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 
+// Capturing the cookie
+if(isset($_COOKIE['welcomeMsg'])){
+    $welcomeMsg = filter_input(INPUT_COOKIE, 'welcomeMsg', FILTER_SANITIZE_STRING);
+}
+
 switch ($action) {
     case 'upload':
         // Store the incoming product id
