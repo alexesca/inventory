@@ -5,6 +5,7 @@ session_start();
 require_once '../library/connections.php';
 require_once '../model/acme-model.php';
 require_once '../model/accounts-model.php';
+require_once '../model/reviews-model.php';
 require_once '../library/functions.php';
 
 $categories = getCategories();
@@ -17,19 +18,28 @@ if (!$action) {
 }
 
 // Check if the firstname cookie exists, get its value
-if(isset($_COOKIE['firstname'])){
+if (isset($_COOKIE['firstname'])) {
     $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
 }
 
 // Capturing the cookie
-if(isset($_COOKIE['welcomeMsg'])){
+if (isset($_COOKIE['welcomeMsg'])) {
     $welcomeMsg = filter_input(INPUT_COOKIE, 'welcomeMsg', FILTER_SANITIZE_STRING);
+}
+
+if (isset($_SESSION['loggedin'])) {
+    $clientId = $_SESSION['clientData']['clientId'];
+    $clientReviews = getClientReviews($clientId);
+    $reviewsHTML = reviewBox($clientReviews);
 }
 
 switch ($action) {
 
     case 'login':
         if (isset($_SESSION['loggedin'])) {
+            $clientId = $_SESSION['clientData']['clientId'];
+            $clientReviews = getClientReviews($clientId);
+            $reviewsHTML = reviewBox($clientReviews);
             include '../view/admin.php';
             exit;
         }
@@ -59,10 +69,10 @@ switch ($action) {
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
         // Setting welcoming msgs cookies
-        $welcomeMsg =  "Welcome, $clientData[clientFirstname]";
+        $welcomeMsg = "Welcome, $clientData[clientFirstname]";
         setcookie('welcomeMsg', $welcomeMsg, strtotime('+1 year'), '/');
         // Destroying cookie
-        setcookie('firstname', null,  strtotime('-1 year'), '/');
+        setcookie('firstname', null, strtotime('-1 year'), '/');
         $cookieFirstname = null;
         // Remove the password from the array
         // the array_pop function removes the last
@@ -71,6 +81,9 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
         // Send them to the admin view
+        $clientId = $_SESSION['clientData']['clientId'];
+        $clientReviews = getClientReviews($clientId);
+        $reviewsHTML = reviewBox($clientReviews);
         include '../view/admin.php';
         exit;
     case 'signup':
@@ -112,6 +125,11 @@ switch ($action) {
         include '../view/registration.php';
         break;
     case 'admin':
+        if (isset($_SESSION['loggedin'])) {
+            $clientId = $_SESSION['clientData']['clientId'];
+            $clientReviews = getClientReviews($clientId);
+            $reviewsHTML = reviewBox($clientReviews);
+        }
         include '../view/admin.php';
         break;
     case 'logout':
@@ -133,7 +151,7 @@ switch ($action) {
             include '../view/client-update.php';
             exit;
         }
-        if($clientEmail !== $_SESSION['clientData']['clientEmail']){
+        if ($clientEmail !== $_SESSION['clientData']['clientEmail']) {
             // Check for existing email address in the table
             $existingEmail = checkExistingEmail($email);
             if ($existingEmail) {

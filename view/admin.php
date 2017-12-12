@@ -45,6 +45,12 @@ if (isset($_SESSION['passwordMessage'])) {
                     echo "<h4>Use the link below to manage products</h4>";
                     echo "<p><a href='/acme/products'>Products</a></p>";
                 }
+                echo "<hr><h1>Reviews:</h1>";
+                if(!empty($reviewsHTML)){
+                    echo $reviewsHTML;
+                } else {
+                    echo '<p class="notice">There are not comments.</p>';
+                }
             }
             ?>
         </div>
