@@ -256,6 +256,15 @@ header {
     height: 200px;
 }
 
+.review-box {
+    padding: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    border: 1px solid red;
+    color: red;
+}
+
 
 
 

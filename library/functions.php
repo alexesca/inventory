@@ -13,8 +13,7 @@ function checkPassword($clientPassword)
 }
 
 
-function navList($categories)
-{
+function navList($categories) {
     // Build a navigation bar using the $categories array
     $navList = '<ul  class="ul">';
     $navList .= "<li><a href='/acme/' title='View the Acme home page'>Home</a></li>";
@@ -25,7 +24,8 @@ function navList($categories)
     return $navList;
 }
 
-function buildProductsDisplay($products){
+function buildProductsDisplay($products)
+{
     $pd = '<ul id="prod-display">';
     foreach ($products as $product) {
         $pd .= '<li>';
@@ -39,8 +39,8 @@ function buildProductsDisplay($products){
     return $pd;
 }
 
-function buildProductDetails($img, $name, $description, $price, $stock, $size, $weight, $location, $vendor, $style){
-    $var = 123;
+function buildProductDetails($img, $name, $description, $price, $stock, $size, $weight, $location, $vendor, $style)
+{
     $pd = <<<EOD
         <div class="product-details">
   <div class="left">
@@ -63,11 +63,53 @@ EOD;
     return $pd;
 }
 
+function reviewForm($invId, $clientId, $screenName) {
+    $rf = <<<EOD
+    <p>Screen Name: $screenName</p>
+    <form method="post" action="/acme/reviews/?action=addReview">
+        <textarea id="" cols="30" rows="10" name="reviewText"></textarea>
+        <input type="hidden" name="action" value="addReview">
+        <input type="hidden" name="invId" value="$invId">
+        <input type="hidden" name="clientId" value="$clientId">
+        <button>Send</button>
+    </form>
+EOD;
+    return $rf;
+}
+
+function updateReviewForm($reviewId, $reviewText, $clientId, $screenName) {
+    $rf = <<<EOD
+    <p>Screen Name: $screenName</p>
+    <form method="post" action="/acme/reviews/?action=updateReview">
+        <textarea id="" cols="30" rows="10" name="reviewText">$reviewText</textarea>
+        <input type="hidden" name="action" value="updateReview">
+        <input type="hidden" name="reviewId" value="$reviewId">
+        <input type="hidden" name="clientId" value="$clientId">
+        <button>Send</button>
+    </form>
+EOD;
+    return $rf;
+}
+
+
+function reviewBox($reviews) {
+    $r = '';
+    foreach ($reviews as $review) {
+        $r .= '<br><hr><div class="review-box">';
+        $r .= '<h3>' . $review["clientLastname"]. '</h3>' . '<p>' . $review["reviewDate"] . '</p>';
+        $r .= '<p>' . $review["reviewText"] . '</p>';
+        $r .= '<a href="/acme/reviews/?action=deleteReview&reviewId=' . $review['reviewId']. '">Delete</a><a  href="/acme/reviews/?action=updateForm&reviewId=' . $review['reviewId']. '">Update</a>';
+        $r .= '</div>';
+    }
+    return $r;
+}
+
 /* * ********************************
 * Functions for working with images
 * ********************************* */
 // Adds "-tn" designation to file name
-function makeThumbnailName($image) {
+function makeThumbnailName($image)
+{
     $i = strrpos($image, '.');
     $image_name = substr($image, 0, $i);
     $ext = substr($image, $i);
@@ -76,7 +118,8 @@ function makeThumbnailName($image) {
 }
 
 // Build images display for image management view
-function buildImageDisplay($imageArray) {
+function buildImageDisplay($imageArray)
+{
     $id = '<ul id="image-display">';
     foreach ($imageArray as $image) {
         $id .= '<li>';
@@ -89,7 +132,8 @@ function buildImageDisplay($imageArray) {
 }
 
 // Build the products select list
-function buildProductsSelect($products) {
+function buildProductsSelect($products)
+{
     $prodList = '<select name="invId" id="invId">';
     $prodList .= "<option>Choose a Product</option>";
     foreach ($products as $product) {
@@ -101,7 +145,8 @@ function buildProductsSelect($products) {
 
 // Handles the file upload process and returns the path
 // The file path is stored into the database
-function uploadFile($name) {
+function uploadFile($name)
+{
     // Gets the paths, full and local directory
     global $image_dir, $image_dir_path;
     if (isset($_FILES[$name])) {
@@ -127,7 +172,8 @@ function uploadFile($name) {
 
 // Processes images by getting paths and
 // creating smaller versions of the image
-function processImage($dir, $filename) {
+function processImage($dir, $filename)
+{
     // Set up the variables
     $dir = $dir . '/';
 
@@ -135,7 +181,7 @@ function processImage($dir, $filename) {
     $image_path = $dir . $filename;
 
     // Set up the thumbnail image path
-    $image_path_tn = $dir.makeThumbnailName($filename);
+    $image_path_tn = $dir . makeThumbnailName($filename);
 
     // Create a thumbnail image that's a maximum of 200 pixels square
     resizeImage($image_path, $image_path_tn, 200, 200);
@@ -145,7 +191,8 @@ function processImage($dir, $filename) {
 }
 
 // Checks and Resizes image
-function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) {
+function resizeImage($old_image_path, $new_image_path, $max_width, $max_height)
+{
 
     // Get image type
     $image_info = getimagesize($old_image_path);
