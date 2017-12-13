@@ -13,7 +13,7 @@
     <main>
         <div class="main">
             <h1>Product Details</h1>
-            <?php if (isset($message)) {
+            <?php if (isset($message) && !empty($message)) {
                 echo $message;
             } ?>
             <?php if (isset($prodDetails)) {
@@ -28,9 +28,9 @@
                 if(isset($reviewForm)) {
                     echo $reviewForm;
                 }
-                if(!empty($reviewsHTML)) {
-                    echo $reviewsHTML;
-                }
+            }
+            if(!empty($reviewsHTML)) {
+                echo $reviewsHTML;
             }
             ?>
         </div>

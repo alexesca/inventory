@@ -6,6 +6,7 @@ require_once '../library/connections.php';
 require_once '../model/acme-model.php';
 require_once '../model/accounts-model.php';
 require_once '../model/products-model.php';
+require_once '../model/reviews-model.php';
 require_once '../library/functions.php';
 
 $categories = getCategories();
@@ -156,6 +157,9 @@ switch ($action) {
     case 'details':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
         $product = getProductDetails($invId);
+        if(filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING) ){
+            $message = "<div class='error'>" . filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING) . "</div>";
+        }
         if(!count($product)){
             $message = "<p class='notice'>Sorry, this product could not be found.</p>";
         } else {
@@ -170,6 +174,15 @@ switch ($action) {
             $vendor = $product[0]['invVendor'];
             $style = $product[0]['invStyle'];
             $prodDetails = buildProductDetails($img, $name, $description, $price, $stock, $size, $weight, $location, $vendor, $style);
+            $reviews = getReviews($invId);
+            $reviewsHTML = reviewBoxReadOnly($reviews);
+            if (!empty($_SESSION['loggedin'])) {
+                $clientId = $_SESSION['clientData']['clientId'];
+                $clientFirstname = $_SESSION['clientData']['clientFirstname'];
+                $clientLastname = $_SESSION['clientData']['clientLastname'];
+                $screenName = substr($clientFirstname,0,1) . $clientLastname;
+                $reviewForm = reviewForm($invId, $clientId, $screenName);
+            }
         }
         include '../view/product-detail.php';
         break;

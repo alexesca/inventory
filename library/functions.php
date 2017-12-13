@@ -66,8 +66,8 @@ EOD;
 function reviewForm($invId, $clientId, $screenName) {
     $rf = <<<EOD
     <p>Screen Name: $screenName</p>
-    <form method="post" action="/acme/reviews/?action=addReview">
-        <textarea id="" cols="30" rows="10" name="reviewText"></textarea>
+    <form method="post" action="/acme/reviews/?action=addReview" class="review-form">
+        <textarea cols="30" rows="10" name="reviewText" id="review"></textarea>
         <input type="hidden" name="action" value="addReview">
         <input type="hidden" name="invId" value="$invId">
         <input type="hidden" name="clientId" value="$clientId">
@@ -80,8 +80,8 @@ EOD;
 function updateReviewForm($reviewId, $reviewText, $clientId, $screenName) {
     $rf = <<<EOD
     <p>Screen Name: $screenName</p>
-    <form method="post" action="/acme/reviews/?action=updateReview">
-        <textarea id="" cols="30" rows="10" name="reviewText">$reviewText</textarea>
+    <form method="post" action="/acme/reviews/?action=updateReview" class="review-form">
+        <textarea cols="30" rows="10" name="reviewText" id="review">$reviewText</textarea>
         <input type="hidden" name="action" value="updateReview">
         <input type="hidden" name="reviewId" value="$reviewId">
         <input type="hidden" name="clientId" value="$clientId">
@@ -95,14 +95,32 @@ EOD;
 function reviewBox($reviews) {
     $r = '';
     foreach ($reviews as $review) {
-        $r .= '<br><hr><div class="review-box">';
-        $r .= '<h3>' . $review["clientLastname"]. '</h3>' . '<p>' . $review["reviewDate"] . '</p>';
+        $clientFirstname = $review["clientFirstname"];
+        $clientLastname = $review["clientLastname"];
+        $screenName = substr($clientFirstname,0,1) . $clientLastname;
+        $r .= '<div class="review-box">';
+        $r .= '<div class="review-box-name-and-date"><h3 class="review-client-name">' . $screenName . '</h3>' . '<p class="review-date">' . $review["reviewDate"] . '</p></div>';
         $r .= '<p>' . $review["reviewText"] . '</p>';
-        $r .= '<a href="/acme/reviews/?action=deleteReview&reviewId=' . $review['reviewId']. '">Delete</a><a  href="/acme/reviews/?action=updateForm&reviewId=' . $review['reviewId']. '">Update</a>';
+        $r .= '<div class="review-links"><a href="/acme/reviews/?action=deleteReviewConfirm&reviewId=' . $review['reviewId']. '">Delete</a><a  href="/acme/reviews/?action=updateForm&reviewId=' . $review['reviewId']. '">Update</a></div>';
         $r .= '</div>';
     }
     return $r;
 }
+
+function reviewBoxReadOnly($reviews) {
+    $r = '';
+    foreach ($reviews as $review) {
+        $clientFirstname = $review["clientFirstname"];
+        $clientLastname = $review["clientLastname"];
+        $screenName = substr($clientFirstname,0,1) . $clientLastname;
+        $r .= '<div class="review-box">';
+        $r .= '<div class="review-box-name-and-date"><h3>' . $screenName. '</h3>' . '<p class="review-date">' . $review["reviewDate"] . '</p></div>';
+        $r .= '<div><p>' . $review["reviewText"] . '</p></div>';
+        $r .= '</div>';
+    }
+    return $r;
+}
+
 
 /* * ********************************
 * Functions for working with images

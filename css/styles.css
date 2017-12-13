@@ -257,16 +257,55 @@ header {
 }
 
 .review-box {
-    padding: 5px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column;
     justify-content: flex-start;
-    border: 1px solid red;
-    color: red;
+    margin-bottom: 10px;
+    align-content: stretch;
+    padding: 0;
+    padding-left: 5px;
+    border: 1px solid grey;
 }
 
+.review-box-name-and-date {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    padding: 0;
+}
 
+.review-date {
+    margin-left: 15px;
+    color: dimgray;
+}
 
+.review-client-name {
+    align-content: flex-start;
+    padding: 0;
+}
+
+.review-links {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.review-links a {
+    margin-right: 15px;
+}
+
+.review-form {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 15px;
+}
+
+.review-form button{
+    height: 30px;
+    width: 60px;
+    align-self: flex-end;
+    margin-top: 5px;
+    background-color: #3CB371;
+}
 
 @media (max-width: 1100px) {
     .thumbnail > img {
@@ -528,6 +567,7 @@ header {
     background-color: salmon;
     padding: 5px;
     color: #fff;
+    margin-bottom: 10px;
 }
 
 .success {

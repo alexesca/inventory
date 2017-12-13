@@ -41,7 +41,7 @@ function getClientReviews($clientId)
 function getReview($reviewId)
 {
     $db = acmeConnect();
-    $sql = 'SELECT  clients.clientId, clients.clientFirstname, clients.clientFirstname, clients.clientLastname, reviews.reviewId, reviews.reviewText, reviews.reviewDate FROM reviews INNER JOIN clients ON reviews.clientId = clients.clientId WHERE reviews.reviewId = :reviewId ORDER BY reviewDate DESC';
+    $sql = 'SELECT  clients.clientId, clients.clientFirstname, clients.clientLastname, reviews.reviewId, reviews.reviewText, reviews.reviewDate FROM reviews INNER JOIN clients ON reviews.clientId = clients.clientId WHERE reviews.reviewId = :reviewId ORDER BY reviewDate DESC';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
     $stmt->execute();
